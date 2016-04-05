@@ -9,7 +9,21 @@ class SpiderMain(object):
         self.outputer = Outputer.Outputer()
 
     def crawl(self, root_url):
-        pass
+        count = 1
+        self.urls.add_new_url(root_url)
+        while self.urls.has_new_url():
+            obj_url = self.urls.get_new_url()
+            try:
+                print("success:{} url:{}".format(count, obj_url))
+                html_content = self.downloader.dowload(obj_url)
+                data = self.parser.parse(html_content)
+                self.urls.add_new_urls()
+                self.outputer.collect_data(data)
+            except:
+                print("failed:{} url:{}".fotmat(count, obj_url))
+            count = count + 1
+        self.outputer.output_html()
+        self.outputer.output_csv()
 
 
 if __name__=="__main__":

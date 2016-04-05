@@ -1,2 +1,3 @@
 class HtmlParser(object):
-    pass
+    def parse(self, html_content):
+        pass
