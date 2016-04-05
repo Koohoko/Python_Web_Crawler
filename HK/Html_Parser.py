@@ -7,7 +7,6 @@ class HtmlParser(object):
             return None
         nohead = re.sub(re.compile(r'{"stn":{\r\n"data":\[\r\n'), '', html_content)
         nohead2 = re.sub(re.compile(r'{"month":\d+,\r\n"dayData":\[\r\n'), '', nohead)
-        print(nohead2)
         notail = re.sub(re.compile(r'\r\n]}\r\n]}}\r\n'), '', nohead2)
         # "25.4"]\r\n]},\r\n["01",
         notail2 = re.sub(re.compile(r'\r\n]}'), '', notail)
