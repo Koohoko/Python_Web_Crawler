@@ -20,7 +20,7 @@ class SpiderMain(object):
                 self.urls.add_new_urls()
                 self.outputer.collect_data(data)
             except:
-                print("failed:{} url:{}".fotmat(count, obj_url))
+                print("failed:{} url:{}".format(count, obj_url))
             count = count + 1
         self.outputer.output_html()
         self.outputer.output_csv()
