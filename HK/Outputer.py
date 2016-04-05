@@ -1,0 +1,2 @@
+class Outputer(object):
+    pass
