@@ -1,27 +1,25 @@
-from HK import Html_Downloader, Url_Manager, Html_Parser, Outputer
+from HK import Html_Downloader, Html_Parser, Outputer
 
 
 class SpiderMain(object):
     def __init__(self):
-        self.urls = Url_Manager.UrlManager()
+
         self.downloader = Html_Downloader.HtmlDownloader()
         self.parser = Html_Parser.HtmlParser()
         self.outputer = Outputer.Outputer()
 
     def crawl(self):
         count = 1
-        url_list = self.urls.generate_new_urls()
-        for obj_url in url_list:
+        for year in range(2010, 2017):
+            new_url = 'url = http://www.hko.gov.hk/cis/dailyExtract/dailyExtract_{}.xml'.format(year)
             try:
-                print("success:{} url:{}".format(count, obj_url))
-                html_content = self.downloader.download(obj_url)
+                html_content = self.downloader.download(new_url, year)
                 data = self.parser.parse(html_content)
-                self.outputer.collect_data(data)
+                self.outputer.output_csv(data, year)
+                print("success:{} url:{}".format(count, new_url))
             except:
-                print("failed:{} url:{}".format(count, obj_url))
+                print("failed:{} url:{}".format(count, new_url))
             count = count + 1
-        self.outputer.output_html()
-        self.outputer.output_csv()
 
 
 if __name__=="__main__":
