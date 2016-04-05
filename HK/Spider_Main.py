@@ -8,16 +8,14 @@ class SpiderMain(object):
         self.parser = Html_Parser.HtmlParser()
         self.outputer = Outputer.Outputer()
 
-    def crawl(self, root_url):
+    def crawl(self):
         count = 1
-        self.urls.add_new_url(root_url)
-        while self.urls.has_new_url():
-            obj_url = self.urls.get_new_url()
+        url_list = self.urls.generate_new_urls()
+        for obj_url in url_list:
             try:
                 print("success:{} url:{}".format(count, obj_url))
-                html_content = self.downloader.dowload(obj_url)
+                html_content = self.downloader.download(obj_url)
                 data = self.parser.parse(html_content)
-                self.urls.add_new_urls()
                 self.outputer.collect_data(data)
             except:
                 print("failed:{} url:{}".format(count, obj_url))
@@ -27,6 +25,5 @@ class SpiderMain(object):
 
 
 if __name__=="__main__":
-    root_url = 'http://www.hko.gov.hk/cis/dailyExtract_e.htm?y=2010&m=1'
     obj_spider = SpiderMain()
-    obj_spider.crawl(root_url)
+    obj_spider.crawl()
