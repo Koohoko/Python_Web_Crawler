@@ -1,6 +1,7 @@
 import re
 import csv
 
+
 class Outputer(object):
     def output_csv(self, data, year):
         name = '{}.csv'.format(year)

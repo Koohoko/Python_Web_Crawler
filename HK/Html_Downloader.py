@@ -1,5 +1,6 @@
 import urllib2
 
+
 class HtmlDownloader(object):
     def download(self, url, year):
         request = urllib2.Request(url)
